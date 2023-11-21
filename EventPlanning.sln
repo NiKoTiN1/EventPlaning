@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaning.Web", "EventPlaning.Web\EventPlaning.Web.csproj", "{65AEECE8-BB0F-4FD5-8AEC-EBA9B6134899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.Web", "EventPlaning.Web\EventPlanning.Web.csproj", "{65AEECE8-BB0F-4FD5-8AEC-EBA9B6134899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaning.Domain", "EventPlaning.Domain\EventPlaning.Domain.csproj", "{5B0A9DB4-295B-4E91-9A6A-1EE02297FAAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.DataAccess", "EventPlaning.DataAccess\EventPlanning.DataAccess.csproj", "{9ACBA93C-55B6-41A7-995C-6AF1642B00E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaning.DataAccess", "EventPlaning.DataAccess\EventPlaning.DataAccess.csproj", "{9ACBA93C-55B6-41A7-995C-6AF1642B00E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.BusinessLogic", "EventPlaning.BusinessLogic\EventPlanning.BusinessLogic.csproj", "{A4C9CABF-FC82-4CFD-9809-D3D8AE1E57B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaning.BusinessLogic", "EventPlaning.BusinessLogic\EventPlaning.BusinessLogic.csproj", "{A4C9CABF-FC82-4CFD-9809-D3D8AE1E57B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.ViewModels", "EventPlaning.ViewModels\EventPlanning.ViewModels.csproj", "{327C5F35-DE55-456E-91CD-F589CF020705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlaning.ViewModels", "EventPlaning.ViewModels\EventPlaning.ViewModels.csproj", "{327C5F35-DE55-456E-91CD-F589CF020705}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "eventPlanning.Client", "eventPlanning.Client\eventPlanning.Client.esproj", "{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.Domain", "EventPlaning.Domain1\EventPlanning.Domain.csproj", "{D67CD315-78DF-4974-8D16-95F1BDC8F662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,6 @@ Global
 		{65AEECE8-BB0F-4FD5-8AEC-EBA9B6134899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65AEECE8-BB0F-4FD5-8AEC-EBA9B6134899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65AEECE8-BB0F-4FD5-8AEC-EBA9B6134899}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B0A9DB4-295B-4E91-9A6A-1EE02297FAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B0A9DB4-295B-4E91-9A6A-1EE02297FAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B0A9DB4-295B-4E91-9A6A-1EE02297FAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B0A9DB4-295B-4E91-9A6A-1EE02297FAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9ACBA93C-55B6-41A7-995C-6AF1642B00E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9ACBA93C-55B6-41A7-995C-6AF1642B00E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ACBA93C-55B6-41A7-995C-6AF1642B00E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,16 @@ Global
 		{327C5F35-DE55-456E-91CD-F589CF020705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327C5F35-DE55-456E-91CD-F589CF020705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{327C5F35-DE55-456E-91CD-F589CF020705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{463AF251-5ABC-4CC7-9AB2-A55E4403D06D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D67CD315-78DF-4974-8D16-95F1BDC8F662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67CD315-78DF-4974-8D16-95F1BDC8F662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67CD315-78DF-4974-8D16-95F1BDC8F662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67CD315-78DF-4974-8D16-95F1BDC8F662}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

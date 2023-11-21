@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "EventPlaning.Web": {
+    "EventPlanning.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

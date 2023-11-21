@@ -1,4 +1,4 @@
-namespace EventPlaning.Web
+namespace EventPlanning.Web
 {
     public class WeatherForecast
     {
