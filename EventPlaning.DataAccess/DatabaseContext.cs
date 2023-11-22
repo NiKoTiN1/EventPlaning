@@ -2,12 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EventPlanning.DataAccess
 {
@@ -19,10 +13,13 @@ namespace EventPlanning.DataAccess
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
+        public DbSet<Guest> Guests { get; set; }
+
+        public DbSet<Creator> Creators { get; set; }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
         }
     }
 }
