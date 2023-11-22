@@ -5,6 +5,6 @@ namespace EventPlanning.Domain.Models
 {
     public class Account : IdentityUser<Guid>, IBaseModel
     {
-        public RefreshToken RefreshToken { get; set; }
+        public RefreshToken? RefreshToken { get; set; }
     }
 }

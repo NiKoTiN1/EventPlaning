@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventPlanning.ViewModels.Models
 {
-    public class RegisterViewModel
+    public class RegisterBaseModel
     {
         [Required]
         [EmailAddress]
@@ -15,10 +15,12 @@ namespace EventPlanning.ViewModels.Models
 
         [Required]
         [DataType(DataType.Password)]
-
         public string Password { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
+
+        [Required]
+        public string PhoneNumber { get; set; }
     }
 }
