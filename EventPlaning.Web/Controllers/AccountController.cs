@@ -28,7 +28,7 @@ namespace EventPlanning.Web.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterGuestViewModel model)
+        public async Task<IActionResult> Register([FromForm] RegisterModel model)
         {
             _logger.LogInformation("Method Register started.");
 
@@ -39,28 +39,7 @@ namespace EventPlanning.Web.Controllers
                 return BadRequest("Model error!");
             }
 
-            var user = await _accountService.CreateGuest(model);
-
-            if (user == null)
-            {
-                _logger.LogWarning("Method Register finished with BadRequest. User Is null.");
-
-                return BadRequest("User with this username is already created!");
-            }
-
-            user.RefreshToken = await _tokenService.GenerateRefreshToken();
-
-            var isUpdated = await _accountService.UpdateUser(user);
-
-            if (!isUpdated)
-            {
-                _logger.LogWarning("Method Register finished with BadRequest.");
-
-                return BadRequest("User cannot set refresh error!");
-            }
-
-            var tokenModel = mapper.Map<TokenViewModel>(user.RefreshToken);
-            tokenModel.AccessToken = await _tokenService.GenerateToken(user);
+            var tokenModel = await _accountService.CreateAccount(model);
 
             _logger.LogInformation("Method Register finished with Ok.");
 

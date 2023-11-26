@@ -1,0 +1,45 @@
+<form [formGroup]="userInfoForm" (ngSubmit)="doChangeStep()">
+    <mat-form-field>
+      <input matNativeControl type="email" formControlName="email" placeholder="Email" >
+      <mat-error *ngIf="userInfoForm.hasError('required', 'email')">
+        Email is requiered!
+      </mat-error>
+      <mat-error *ngIf="userInfoForm.hasError('email', 'email')">
+        This field must be in email type!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matNativeControl type="text" formControlName="userName" placeholder="Username">
+      <mat-error *ngIf="userInfoForm.hasError('required', 'userName')">
+        Username number is requiered!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matNativeControl type="text" formControlName="phoneNumber" placeholder="Phone Number">
+      <mat-error *ngIf="userInfoForm.hasError('required', 'phoneNumber')">
+        Phone number is requiered!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matNativeControl type="password" formControlName="password" placeholder="Password">
+      <mat-error *ngIf="userInfoForm.hasError('required', 'password')">
+        Password is requiered!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matNativeControl type="password" formControlName="passwordConfirm" placeholder="Password confirm" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="userInfoForm.hasError('required', 'passwordConfirm')">
+        Password confirm is requiered!
+      </mat-error>
+      <mat-error *ngIf="userInfoForm.hasError('notSame')">
+        Passwords do not match
+      </mat-error>  
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" >Next</button>
+    <span>Already have account? <a href="login" type="submit">Login</a></span>
+  </form>

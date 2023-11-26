@@ -1,0 +1,29 @@
+<form [formGroup]="additionalInfoForm" (ngSubmit)="doChangeStep()">
+    <div *ngIf="userRole === roles.Guest">
+        <mat-form-field>
+          <input matNativeControl type="date" formControlName="birthDate" placeholder="Birth Date">
+          <mat-error *ngIf="additionalInfoForm.hasError('required', 'birthDate')">
+            Birth date is requiered!
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="userRole === roles.Creator">
+        <mat-form-field>
+          <input matNativeControl type="text" formControlName="organizationName" placeholder="Organization Name">
+          <mat-error *ngIf="additionalInfoForm.hasError('required', 'organizationName')">
+            Organization name is requiered!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matNativeControl type="text" formControlName="website" placeholder="Website">
+          <mat-error *ngIf="additionalInfoForm.hasError('required', 'website')">
+            Website is requiered!
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <button mat-raised-button	type="submit">Create account</button>
+      <span>Already have account? <a href="login" type="submit">Login</a></span>
+  </form>

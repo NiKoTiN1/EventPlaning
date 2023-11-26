@@ -1,0 +1,21 @@
+mat-form-field {
+    display: block;
+    padding: 2px;
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-bottom: 17px;
+}

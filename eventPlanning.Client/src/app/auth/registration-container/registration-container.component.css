@@ -1,0 +1,30 @@
+mat-card {
+    text-align: center;
+    margin: 0 auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+    padding: 1rem 4rem;
+}
+
+mat-card-content {
+    margin: 0;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.error {
+    text-align: start;
+    color: red;
+    margin-top: 5px;
+  }
+  
+  .register-card {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }

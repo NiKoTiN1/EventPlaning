@@ -1,0 +1,53 @@
+mat-form-field {
+    display: block;
+    padding: 5px;
+  }
+  
+  mat-card {
+    max-width: 20%;
+    text-align: center;
+    margin: 0 auto;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  mat-card-content {
+    margin: 0;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+  }
+  
+  a {
+    color: grey;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 17px;
+  }
+  
+  .error {
+    text-align: start;
+    color: red;
+    margin-top: 5px;
+  }
+  
+  .login-card {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: 100%;
+  }
+  

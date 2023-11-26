@@ -9,7 +9,7 @@ namespace EventPlanning.BusinessLogic.Interfaces
         Task<Account> GetById(string userId);
         Task<bool> UpdateUser(Account user);
         bool VerifyUser(Account user, string password);
-        Task<Account> CreateGuest(RegisterGuestViewModel model);
+        Task<TokenViewModel> CreateAccount(RegisterModel model);
         Task<bool> IsAdmin(string userId);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventPlanning.ViewModels.Models
 {
-    public class RegisterBaseModel
+    public class RegisterModel
     {
         [Required]
         [EmailAddress]
@@ -22,5 +22,19 @@ namespace EventPlanning.ViewModels.Models
 
         [Required]
         public string PhoneNumber { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? BirthDate { get; set; }
+
+        [MinLength(5)]
+        [MaxLength(100)]
+        public string? OrganizationName { get; set; }
+
+        [MinLength(5)]
+        [MaxLength(100)]
+        public string? Website { get; set; }
+
+        [Required]
+        public string UserType { get; set; }
     }
 }

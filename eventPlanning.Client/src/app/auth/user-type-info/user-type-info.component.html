@@ -1,0 +1,14 @@
+<form [formGroup]="userTypeInfoForm" (ngSubmit)="doChangeStep()">
+  <mat-form-field>
+    <mat-label>Choose role</mat-label>
+    <mat-select [(ngModel)]="userRole" formControlName="userType">
+      <mat-option *ngFor="let roleId of enumKeys" [value]="roleId">{{ roles[roleId] }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="userTypeInfoForm.hasError('required', 'userType')">
+      Role is requiered!
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button	type="submit">Next</button>
+  <span>Already have account? <a href="login" type="submit">Login</a></span>
+  </form>

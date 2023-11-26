@@ -1,0 +1,33 @@
+<div class="register-card">
+  <mat-card id="card">
+    <mat-card-title>
+      Register new user now!
+    </mat-card-title>
+    <mat-card-content>
+      <ng-container [ngSwitch]="currentStep$ | async">
+        <app-user-info 
+          *ngSwitchCase="'userInfo'" 
+          (subformInitialized)="subformInitialized('userInfo', $event)" 
+          (changeStep)="changeStep('userInfo')"
+        ></app-user-info>
+        <app-user-type-info 
+        *ngSwitchCase="'userTypeInfo'" 
+        (subformInitialized)="subformInitialized('userTypeInfo', $event)" 
+        (changeStep)="changeStep('userTypeInfo')"
+      ></app-user-type-info>
+        <app-additional-info
+          *ngSwitchCase="'additionalInfo'" 
+          [userRole]="getRole()" 
+          (subformInitialized)="subformInitialized('additionalInfo', $event)" 
+          (changeStep)="changeStep('additionalInfo')"
+        ></app-additional-info>
+      </ng-container>
+      <div *ngIf="errors.length != 0">
+        <p class="error" *ngFor="let error of errors">
+          {{error}}
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+  

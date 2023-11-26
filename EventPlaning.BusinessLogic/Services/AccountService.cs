@@ -7,27 +7,34 @@ using EventPlanning.Domain.Models;
 using EventPlanning.ViewModels.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using System.Web.Http;
 
 namespace EventPlanning.BusinessLogic.Services
 {
     public class AccountService : IAccountService
     {
+        private readonly UserManager<Account> _userManager;
+        private readonly IMapper _mapper;
+        private readonly ILogger<AccountService> _logger;
+        private readonly IGuestService _guestService;
+        private readonly ICreatorService _creatorService;
+        private readonly ITokenService _tokenService;
+
         public AccountService(
             UserManager<Account> userManager,
             IMapper mapper,
             ILogger<AccountService> logger,
-            IGuestRepository guestRepository)
+            IGuestService guestService,
+            ICreatorService creatorService,
+            ITokenService tokenService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _logger = logger;
-            _guestRepository = guestRepository;
+            _guestService = guestService;
+            _creatorService = creatorService;
+            _tokenService = tokenService;
         }
-
-        private readonly UserManager<Account> _userManager;
-        private readonly IMapper _mapper;
-        private readonly ILogger<AccountService> _logger;
-        private readonly IGuestRepository _guestRepository;
 
         public async Task<Account> GetByEmail(string email)
         {
@@ -39,63 +46,49 @@ namespace EventPlanning.BusinessLogic.Services
             return await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
         }
 
-        public async Task<Account> CreateGuest(RegisterGuestViewModel model)
+        public async Task<TokenViewModel> CreateAccount(RegisterModel model)
         {
-            _logger.LogInformation("Method CreateUser started.");
-            var guest = _mapper.Map<Guest>(model);
+            var userType = (Roles) Enum.Parse(typeof(Roles), model.UserType, ignoreCase: true);
 
-            if (!(await _userManager.CreateAsync(guest.Account, model.Password)).Succeeded)
+            Account account;
+
+            if (userType == Roles.Guest)
             {
-                _logger.LogWarning("Method CreateUser finished with error.");
+                var guest = _mapper.Map<Guest>(model);
+                account = await CreateGuest(guest, model.Password);
+            }
+            else
+            {
+                var creator = _mapper.Map<Creator>(model);
+                account = await CreateCreator(creator, model.Password);
+            }
 
+            if (account == null)
+            {
+                var response = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+                response.Content = new StringContent("Cannot create an account");
+                throw new HttpResponseException(response);
+            }
+
+            account.RefreshToken = await _tokenService.GenerateRefreshToken();
+
+            var isUpdated = await UpdateUser(account);
+
+            if (!isUpdated)
+            {
                 return null;
             }
 
-            await _guestRepository.Add(guest);
+            var tokenModel = _mapper.Map<TokenViewModel>(account.RefreshToken);
+            tokenModel.AccessToken = await _tokenService.GenerateToken(account);
 
-            var roleAdded = await AddRoleToUser(guest.Account, Roles.Guest);
-
-            if (!roleAdded)
-            {
-                _logger.LogWarning("Method CreateUser finished with error.");
-                await _userManager.DeleteAsync(guest.Account);
-                return null;
-            }
-
-            _logger.LogInformation("Method CreateUser finished succeed.");
-
-            return guest.Account;
-        }
-
-        public async Task<Account> CreateCreator(RegisterCreatorViewModel model)
-        {
-            _logger.LogInformation("Method CreateUser started.");
-            var user = _mapper.Map<Account>(model);
-
-            if (!(await _userManager.CreateAsync(user, model.Password)).Succeeded)
-            {
-                _logger.LogWarning("Method CreateUser finished with error.");
-
-                return null;
-            }
-
-            var roleAdded = await AddRoleToUser(user, Roles.Creator);
-
-            if (!roleAdded)
-            {
-                _logger.LogWarning("Method CreateUser finished with error.");
-                await _userManager.DeleteAsync(user);
-                return null;
-            }
-
-            _logger.LogInformation("Method CreateUser finished succeed.");
-
-            return user;
+            return tokenModel;
         }
 
         public async Task<bool> UpdateUser(Account user)
         {
             var result = await _userManager.UpdateAsync(user);
+
             return result.Succeeded;
         }
 
@@ -135,6 +128,62 @@ namespace EventPlanning.BusinessLogic.Services
             _logger.LogInformation("Method IsAdmin finished succeed.");
 
             return await _userManager.IsInRoleAsync(user, Roles.Creator.ToString());
+        }
+
+        private async Task<Account> CreateGuest(Guest guest, string password)
+        {
+            _logger.LogInformation("Method CreateGuest started.");
+
+            if (!(await _userManager.CreateAsync(guest.Account, password)).Succeeded)
+            {
+                _logger.LogWarning("Method CreateGuest finished with error.");
+
+                return null;
+            }
+
+            await _guestService.CreateGuest(guest);
+
+            var roleAdded = await AddRoleToUser(guest.Account, Roles.Guest);
+
+            if (!roleAdded)
+            {
+                _logger.LogWarning("Method CreateGuest finished with error.");
+                await _userManager.DeleteAsync(guest.Account);
+
+                return null;
+            }
+
+            _logger.LogInformation("Method CreateGuest finished succeed.");
+
+            return guest.Account;
+        }
+
+        private async Task<Account> CreateCreator(Creator creator, string password)
+        {
+            _logger.LogInformation("Method CreateCreator started.");
+
+            if (!(await _userManager.CreateAsync(creator.Account, password)).Succeeded)
+            {
+                _logger.LogWarning("Method CreateCreator finished with error.");
+
+                return null;
+            }
+
+            await _creatorService.CreateCreator(creator);
+
+            var roleAdded = await AddRoleToUser(creator.Account, Roles.Creator);
+
+            if (!roleAdded)
+            {
+                _logger.LogWarning("Method CreateCreator finished with error.");
+                await _userManager.DeleteAsync(creator.Account);
+
+                return null;
+            }
+
+            _logger.LogInformation("Method CreateCreator finished succeed.");
+
+            return creator.Account;
         }
     }
 }

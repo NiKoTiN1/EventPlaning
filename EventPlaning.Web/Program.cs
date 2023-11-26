@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string policy = "AllowAnyOriginPolicy";
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -50,10 +50,23 @@ builder.Services.AddAutoMapper(typeof(TokenMappingProfile));
 
 builder.Services.AddTransient(typeof(IRefreshTokenRepository), typeof(RefreshTokenRepository));
 builder.Services.AddTransient(typeof(IGuestRepository), typeof(GuestRepository));
+builder.Services.AddTransient(typeof(ICreatorRepository), typeof(CreatorRepository));
 
-builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IGuestService, GuestService>();
+builder.Services.AddTransient<ICreatorService, CreatorService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
 
+builder.Services.AddCors(Options =>
+{
+    Options.AddPolicy(policy,
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,6 +79,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+app.UseCors(policy);
 
 app.UseAuthentication();
 app.UseAuthorization();
