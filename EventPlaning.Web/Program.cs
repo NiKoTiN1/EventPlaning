@@ -47,15 +47,18 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAutoMapper(typeof(AccountMappingProfile));
 builder.Services.AddAutoMapper(typeof(TokenMappingProfile));
+builder.Services.AddAutoMapper(typeof(EventMappingProfile));
 
 builder.Services.AddTransient(typeof(IRefreshTokenRepository), typeof(RefreshTokenRepository));
 builder.Services.AddTransient(typeof(IGuestRepository), typeof(GuestRepository));
 builder.Services.AddTransient(typeof(ICreatorRepository), typeof(CreatorRepository));
+builder.Services.AddTransient(typeof(IEventRepository), typeof(EventRepository));
 
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IGuestService, GuestService>();
 builder.Services.AddTransient<ICreatorService, CreatorService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IEventService, EventService>();
 
 builder.Services.AddCors(Options =>
 {

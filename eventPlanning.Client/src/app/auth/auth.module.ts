@@ -17,7 +17,13 @@ import { AdditionalInfoComponent } from './additional-info/additional-info.compo
 
 
 @NgModule({
-  declarations: [LoginComponent, RegistrationContainerComponent, UserTypeInfoComponent, UserInfoComponent, AdditionalInfoComponent],
+  declarations: [
+    LoginComponent,
+    RegistrationContainerComponent, 
+    UserTypeInfoComponent,
+    UserInfoComponent,
+    AdditionalInfoComponent
+  ],
   imports: [
     AuthRoutingModule,
     HttpClientModule,

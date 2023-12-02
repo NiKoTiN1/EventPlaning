@@ -13,6 +13,7 @@ import {
 } from 'ngx-auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthenticationService } from './auth/services/authentication.service';
+import { EventModule } from './event/event.module';
 
 export function factory(
   authenticationService: AuthenticationService
@@ -30,6 +31,7 @@ export function factory(
     RouterModule,
     AppRoutingModule,
     AuthModule,
+    EventModule,
     NgxAuth,
     BrowserAnimationsModule,
   ],

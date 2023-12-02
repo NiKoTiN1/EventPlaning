@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="container-body">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Shiba Inu</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <form
+          [formGroup]="createEventForm"
+          class="main-form"
+          (ngSubmit)="create()"
+        >
+          <mat-form-field>
+            <input
+              matNativeControl
+              type="text"
+              formControlName="eventName"
+              placeholder="Event Name"
+            />
+            <mat-error
+              *ngIf="createEventForm.hasError('required', 'eventName')"
+            >
+              Event Name is requiered!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matNativeControl
+              type="text"
+              formControlName="eventDescription"
+              placeholder="Description"
+            />
+            <mat-error
+              *ngIf="createEventForm.hasError('required', 'eventDescription')"
+            >
+              Description is requiered!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matNativeControl
+              type="datetime-local"
+              formControlName="startDate"
+              placeholder="Starts at"
+            />
+            <mat-error
+              *ngIf="createEventForm.hasError('required', 'startDate')"
+            >
+              "Starts at" time is requiered!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matNativeControl  
+              type="number"
+              formControlName="maxCapacity"
+              placeholder="Max Guests"
+            />
+            <mat-error
+              *ngIf="createEventForm.hasError('required', 'maxCapacity')"
+            >
+              Max Guests is requiered!
+            </mat-error>
+          </mat-form-field>
+          <div class="fields-container">
+            <app-event-custom-field
+              *ngFor="let field of eventFields().controls let i = index"
+              [form]="field"
+              [id]="i"
+              (delete)="removeEventField($event)"
+            ></app-event-custom-field>
+          </div>
+          <div class="button-container">
+            <button
+            mat-raised-button
+            class="btn btn-default"
+            type="button"
+            (click)="addEventField()"
+          >
+            Add field
+          </button>
+          <button mat-raised-button class="btn btn-default" type="submit">
+            login
+          </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

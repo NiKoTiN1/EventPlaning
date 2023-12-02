@@ -53,8 +53,6 @@ export class RegistrationContainerComponent implements OnInit {
   }
 
   submitForm() {
-        console.log(this.userForm.value);
-        console.log(this.userForm);
         const formData = this.userForm.value;
 
         const model: RegisterModel = {
@@ -67,8 +65,6 @@ export class RegistrationContainerComponent implements OnInit {
           organizationName: formData.additionalInfo.organizationName,
           website: formData.additionalInfo.website,
         };
-
-        console.log(model);
 
         this.authService.registration(model).subscribe(
           (data: AccessData) => {

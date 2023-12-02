@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="field-container">
+  <mat-form-field>
+    <input
+      matNativeControl
+      type="text"
+      formControlName="name"
+      placeholder="Name"
+    />
+    <mat-error *ngIf="form.hasError('required', 'name')">
+      Email is requiered!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matNativeControl
+      [type]="inputType"
+      formControlName="description"
+      placeholder="Description"
+    />
+    <mat-error *ngIf="form.hasError('required', 'description')">
+      Email is requiered!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Choose type</mat-label>
+    <mat-select
+      [(ngModel)]="currentfieldType"
+      (valueChange)="changeInputType($event)"
+      formControlName="fieldType"
+    >
+      <mat-option
+        *ngFor="let fieldTypeId of enumKeys"
+        [value]="fieldTypeId"
+        >{{ fieldTypes[fieldTypeId] }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngIf="form.hasError('required', 'fieldType')">
+      Role is requiered!
+    </mat-error>
+  </mat-form-field>
+  <button mat-icon-button aria-label="Cancel" (click)="deleteField()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</form>
