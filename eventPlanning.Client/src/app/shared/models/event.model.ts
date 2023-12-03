@@ -1,5 +1,4 @@
 import { EventField } from "./event-field.model";
-import { PageMode } from "./page-mode.enum";
 
 export interface EventModel {
     id: string,

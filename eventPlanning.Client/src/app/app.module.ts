@@ -36,6 +36,8 @@ export function factory(
     BrowserAnimationsModule,
   ],
   providers: [
+    { provide: PROTECTED_FALLBACK_PAGE_URI, useValue: 'event/all' },
+    { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/login' },
     {
       provide: AUTH_SERVICE,
       deps: [AuthenticationService],
