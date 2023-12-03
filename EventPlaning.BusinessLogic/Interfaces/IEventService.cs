@@ -9,6 +9,7 @@ namespace EventPlanning.BusinessLogic.Interfaces
 {
     public interface IEventService
     {
+        List<EventModelDto> GetAll();
         Task CreateEvent(CreateEventModelDto model);
     }
 }

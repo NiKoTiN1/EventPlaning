@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, catchError, tap, throwError } from "rxjs";
+import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { CreateEvent } from "src/app/shared/models/create-event.model";
 import {
     HttpClient,
@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { environment } from "src/app/environments/environment";
+import { EventModel } from "src/app/shared/models/event.model";
 
 @Injectable({
     providedIn: 'any',
@@ -17,6 +18,8 @@ export class EventService {
         private http: HttpClient,
         private router: Router
     ) { }
+
+
     public createEvent(model: CreateEvent): Observable<CreateEvent> {
         return this.http
             .post<CreateEvent>(`${environment.apiUrl}/event/create`, JSON.stringify(model), {
@@ -34,6 +37,15 @@ export class EventService {
                     // this.logout();
                 })
             );
+    }
+
+    public getAllEvents(): Observable<EventModel[]> {
+        return this.http
+            .get<EventModel[]>(`${environment.apiUrl}/event/all`)
+            .pipe(
+                map((event: EventModel[]) => event as EventModel[]),
+                catchError((err) => this.catchErrorLog(err))
+            );;
     }
 
     private catchErrorLog(err: Error): Observable<never> {

@@ -20,10 +20,11 @@ namespace EventPlanning.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        //public async Task GetAll()
-        //{
-        //    return await _eventRepository.Get(e => true, new string[] { "EventField" })
-        //}
+        public List<EventModelDto> GetAll()
+        {
+            var allEvents = _eventRepository.Get(e => true, new string[] { "EventFields" }).ToList();
+            return _mapper.Map<List<EventModelDto>>(allEvents);
+        }
 
         public async Task CreateEvent(CreateEventModelDto model)
         {

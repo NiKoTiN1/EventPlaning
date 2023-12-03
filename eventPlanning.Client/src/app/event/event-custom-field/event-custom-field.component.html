@@ -7,7 +7,7 @@
       placeholder="Name"
     />
     <mat-error *ngIf="form.hasError('required', 'name')">
-      Email is requiered!
+      Field Name is requiered!
     </mat-error>
   </mat-form-field>
   <mat-form-field>
@@ -18,7 +18,7 @@
       placeholder="Description"
     />
     <mat-error *ngIf="form.hasError('required', 'description')">
-      Email is requiered!
+      Field Description is requiered!
     </mat-error>
   </mat-form-field>
   <mat-form-field>
@@ -38,7 +38,7 @@
       Role is requiered!
     </mat-error>
   </mat-form-field>
-  <button mat-icon-button aria-label="Cancel" (click)="deleteField()">
+  <button *ngIf="pageMode != pageModes.View" mat-icon-button aria-label="Cancel" (click)="deleteField()">
     <mat-icon>cancel</mat-icon>
   </button>
 </form>

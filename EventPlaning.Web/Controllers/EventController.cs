@@ -18,34 +18,21 @@ namespace EventPlanning.Web.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> Register([FromForm] RegisterModel model)
+        public async Task<IActionResult> GetAllEvents()
         {
-
-            if (!ModelState.IsValid)
-            {
-
-                return BadRequest("Model error!");
-            }
-            //var tokenModel = await _accountService.CreateAccount(model);
-
-
-            return Ok();
+            var events = _eventService.GetAll();
+            return Ok(events);
         }
 
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateEvent([FromBody] CreateEventModelDto model)
         {
-            Console.WriteLine(DateTime.Now.ToString());
-
             if (!ModelState.IsValid)
             {   
                 return BadRequest("Model error!");
             }
             await _eventService.CreateEvent(model);
-
-            //var tokenModel = await _accountService.CreateAccount(model);
-
 
             return Ok(model);
         }

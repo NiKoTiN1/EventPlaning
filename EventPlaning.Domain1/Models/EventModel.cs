@@ -20,7 +20,7 @@ namespace EventPlanning.Domain.Models
 
         [Required]
         [MaxLength(1000)]
-        public string EventDescriptions { get; set; }
+        public string EventDescription { get; set; }
 
         public List<EventField> EventFields { get; set; }
     }

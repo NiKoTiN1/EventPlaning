@@ -11,13 +11,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { EventCustomFieldComponent } from './event-custom-field/event-custom-field.component';
 import { MatIconModule } from '@angular/material/icon';
+import { AllComponent } from './all/all.component';
+import { EventComponent } from './event/event.component';
 
 
 
 @NgModule({
   declarations: [
     CreateComponent,
-    EventCustomFieldComponent
+    EventCustomFieldComponent,
+    AllComponent,
+    EventComponent
   ],
   imports: [
     EventRoutingModule,

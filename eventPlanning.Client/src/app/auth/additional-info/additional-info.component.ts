@@ -17,7 +17,6 @@ export class AdditionalInfoComponent {
   constructor(private _fb: FormBuilder) { }
 
   ngOnInit() {
-    console.log(this.userRole);
     if (this.userRole == this.roles.Creator) {
       this.additionalInfoForm = this._fb.group({
         organizationName: new FormControl('', [Validators.required]),

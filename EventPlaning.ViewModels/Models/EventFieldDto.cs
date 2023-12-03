@@ -4,6 +4,8 @@ namespace EventPlanning.ViewModels.Models
 {
     public class EventFieldDto
     {
+        public Guid Id { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
         [MaxLength(100)]
@@ -15,6 +17,6 @@ namespace EventPlanning.ViewModels.Models
         public string Description { get; set; }
 
         [Required]
-        public FieldType Type { get; set; }
+        public FieldType FieldType { get; set; }
     }
 }
